@@ -1,15 +1,9 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <style>	
@@ -58,7 +52,7 @@ input[type=text]{
     <header>
     	<h2>Search Movie</h2>
         <form  id="form">
-            <input type="text" placeholder="Search Movie/Show" id="search" class="search">
+            <input type="text" placeholder="Search Movie/TV Show" id="search" class="search">
             <button id="search" class="search">Search</button>
         </form>
     </header>
@@ -83,21 +77,63 @@ input[type=text]{
 
 const API_KEY = 'api_key=9a85a018f878f3af62f324c75c332248';
 const BASE_URL = 'https://api.themoviedb.org/3';
+const LANG = '&language=en'
+
+
 
 //use the below api url for the most popular movies
-const API_URL = BASE_URL + '/discover/movie?&region=IN&sort_by=popularity.desc&'+API_KEY+'&language=en';
+const DiscoverMovies = BASE_URL + '/discover/movie?'+ API_KEY+'&language=en-IN&region=IN';
 
-//use the below api url for the best movies from 2021
-const API2_URL = BASE_URL + '/discover/movie?primary_release_year=2021&sort_by=vote_average.desc&'+API_KEY;
+const DiscoverMovies_Popularity_DESC = BASE_URL + '/discover/movie?&region=IN&sort_by=popularity.desc&'+ API_KEY+'&language=en-IN';
 
-//use the below api url for the movies are in theatres
-const API3_URL = BASE_URL + '/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22&'+API_KEY;
 
-//use the below api url for the highest rated movies
-const API4_URL = BASE_URL + 'the highest rated movies rated R&'+API_KEY;
+const Most_Popular_Movies = BASE_URL + '/discover/movie?&region=IN&sort_by=popularity.desc&'+API_KEY+'&language=en';
+
+
+// Get a list of the current popular movies on TMDB. This list updates daily.
+const Popular_Movies = BASE_URL + '/movie/popular?' + API_KEY + LANG + '&page=1' ;
+
+const Upcoming_Movies = BASE_URL + '/movie/upcoming?' + API_KEY + LANG + '&page=1' ;
+
+const Top_Rated_Movies = BASE_URL + '/movie/top_rated?' + API_KEY + LANG + '&page=1' ;
+
+const Movies_NowPlaying = BASE_URL + '/movie/now_playing?' + API_KEY + LANG + '&page=1' ;
+
+const Movies_Latest = BASE_URL + '/movie/latest?' + API_KEY;
+
+
+const Trending_All_Last_24h = BASE_URL + '/trending/all/day?' + API_KEY;
+
+const Trending_All_Last_7d = BASE_URL + '/trending/all/week?' + API_KEY;
+
+const Trending_Movies_Last_24h = BASE_URL + '/trending/movie/day?' + API_KEY;
+
+const Trending_Movies_Last_7d = BASE_URL + '/trending/movie/week?' + API_KEY;
+
+const Trending_Shows_Last_24h = BASE_URL + '/trending/tv/day?' + API_KEY;
+
+const Trending_Shows_Last_7d = BASE_URL + '/trending/tv/week?' + API_KEY;
+
+const Trending_Persons_Last_24h = BASE_URL + '/trending/person/day?' + API_KEY;
+
+const Trending_Persons_Last_7d = BASE_URL + '/trending/person/week?' + API_KEY;
+
+
+const Telugu_Movies = BASE_URL + '/discover/movie?&region=IN&' + API_KEY + '&with_original_language=te';
+
+const Tamil_Movies = BASE_URL + '/discover/movie?&region=IN&' + API_KEY + '&with_original_language=ta';
+
+const English_Movies = BASE_URL + '/discover/movie?&region=IN&' + API_KEY + '&with_original_language=en';
+
+const Hindi_Movies = BASE_URL + '/discover/movie?&region=IN&' + API_KEY + '&with_original_language=hi';
+
+const Malayalam_Movies = BASE_URL + '/discover/movie?' + API_KEY + '&with_original_language=ml';
+
+
 
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const IMG_URL_ORI = 'https://image.tmdb.org/t/p/original';
 const searchURL = BASE_URL + '/search/movie?'+API_KEY;
 
 const main = document.getElementById('main');
@@ -106,8 +142,27 @@ const search = document.getElementById('search');
 
 
 
+//getMovies(Trending_All_Last_24h);
+//getMovies(Trending_All_Last_7d);
+//getMovies(Trending_Movies_Last_24h);
+//getMovies(Trending_Movies_Last_7d);
+//getMovies(Trending_Shows_Last_24h);
+//getMovies(Trending_Shows_Last_7d);
+//getMovies(Trending_Persons_Last_24h);
 
-getMovies(API_URL);
+
+//OTT Movie Providers
+//getMovies("https://api.themoviedb.org/3/watch/providers/movie?api_key=9a85a018f878f3af62f324c75c332248");
+
+//OTT TV Providers
+//getMovies("https://api.themoviedb.org/3/watch/providers/tv?api_key=9a85a018f878f3af62f324c75c332248");
+
+
+//getMovies(Tamil_Movies)
+getMovies(Telugu_Movies)
+//getMovies(English_Movies)
+//getMovies(Hindi_Movies)
+//getMovies(Malayalam_Movies)
 
 
 // Get Movies
@@ -125,13 +180,14 @@ function showMovies(data) {
     main.innerHTML = '';
 
     data.forEach(movie => {
-        const {title, poster_path, vote_average, overview, id} = movie;
-        const movieEl = document.createElement('div');
-        movieEl.classList.add('movie');
+        const {title, poster_path, backdrop_path, popularity, vote_count, vote_average, overview, release_date, adult, original_title, original_language, video, id, provider_name, logo_path} = movie;
+       const movieEl = document.createElement('div');
+       movieEl.classList.add('movie');
         movieEl.innerHTML = `             
     <div class="w3-container w3-col l3 s6">
-        <img src="${poster_path? IMG_URL+poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}" style="width:100%">
-        <p style="text-align:left;font-size:0.9em;"> ${title.slice(0,35)} <br> <strong> ${vote_average} </strong> <br>
+        <img src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}" style="width:300px;height:450px;">
+        <p>
+        
         </p>
     </div>
         `
