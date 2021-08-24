@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,16 @@
     
     <!-- W3 Schools CSS -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
     
     <!-- Bootstrap CDN's -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
   
 </head>
 
@@ -78,6 +83,7 @@
     font-weight: 600;
 	}
     
+    
 </style>
 
 <body>
@@ -85,19 +91,19 @@
 
 <!-- Nav Bar Section -->
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">DIGITAL PREMIERES</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Movies</a></li>
-      <li><a href="#">TV Shows</a></li>
+      <li><a onClick=getMovies(Trending_All_Last_24h) href="#">Trending</a></li>
+      <li><a onClick=getMovies(Telugu_Movies) href="#">Telugu Movies</a></li>
     </ul>
-	<form  id="form">
+	<form id="form">
             <input type="text" placeholder="Search Movie/TV Show" id="search" class="search">
             <button id="search" class="search">Search</button>
-        </form>
+     </form>
   </div>
 </nav>
 <!-- /Nav Bar Section -->
@@ -188,6 +194,8 @@
       <div class="page" id="next" href="#" >Next Page</div>
     </div>
  /Pagination --> 
+ 
+
 
 
 </center>
@@ -281,8 +289,8 @@
 
 
     //getMovies(Tamil_Movies)
-    getMovies(Telugu_Movies)
-    //getMovies(English_Movies)
+    //getMovies(Telugu_Movies)
+    getMovies(English_Movies)
     //getMovies(Hindi_Movies)
     //getMovies(Malayalam_Movies)
 
@@ -304,11 +312,12 @@
             const {title, poster_path, backdrop_path, popularity, vote_count, vote_average, overview, release_date, adult, original_title, original_language, video, id, provider_name, logo_path} = movie;
            const movieEl = document.createElement('div');
            movieEl.classList.add('movie');
-            movieEl.innerHTML = `             
-        <div class="container-fuild col-sm-3 col-md-4 col-lg-3">
-            <img class="img-responsive img-rounded" src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
+            movieEl.innerHTML = `    
+            
+        <div class="container col-sm-3 col-md-4 col-lg-3">
+            <img class="img-responsive img-rounded"  src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580"  }" alt="${title} style="width:100%;"">
             <p>
-
+            
             </p>
         </div>
             `
