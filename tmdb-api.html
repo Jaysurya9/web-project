@@ -87,15 +87,14 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://i.pinimg.com/564x/f6/07/3c/f6073c26e37a97549314b48f29595b84.jpg" alt="" width="1200" height="700">
+        <img src="https://i.pinimg.com/564x/f6/07/3c/f6073c26e37a97549314b48f29595b84.jpg" alt="" width="800" height="200">
         <div class="carousel-caption">
           <h3>Netflix</h3>
           <p></p>
         </div>      
       </div>
-
       <div class="item">
-        <img src="https://i.pinimg.com/564x/49/45/79/49457903ec69e585f1d0573e69b33c19.jpg" alt="" width="1200" height="700">
+        <img src="https://i.pinimg.com/564x/49/45/79/49457903ec69e585f1d0573e69b33c19.jpg" alt="" width="800" height="200">
         <div class="carousel-caption">
           <h3>Taragathi Gadhilo</h3>
           <p></p>
@@ -103,7 +102,7 @@
       </div>
     
       <div class="item">
-        <img src="https://i.pinimg.com/564x/2e/77/23/2e7723820c5c3ae3f8ed078af5d2d445.jpg" alt="" width="1200" height="700">
+        <img src="https://i.pinimg.com/564x/2e/77/23/2e7723820c5c3ae3f8ed078af5d2d445.jpg" alt="" width="800" height="200">
         <div class="carousel-caption">
           <h3>One</h3>
           <p></p>
@@ -139,7 +138,11 @@
     
  /Section 1 -->
 
-<div class="container"><h3>Movies</h3></div>
+<div class="container">
+	<h3>Movies</h3>
+	<p>
+    </p>
+</div>
 
 
 <!-- Section 2 -->
@@ -254,7 +257,6 @@
         })
     }
 
-
     // Show Movies
     function showMovies(data) {
         main.innerHTML = '';
@@ -264,7 +266,7 @@
            const movieEl = document.createElement('div');
            movieEl.classList.add('movie');
             movieEl.innerHTML = `             
-        <div class="container col-sm-3 col-md-4 col-lg-3">
+        <div class="container-fuild col-sm-3 col-md-4 col-lg-3">
             <img class="img-responsive img-rounded" src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580" }" alt="${title}">
             <p>
 
