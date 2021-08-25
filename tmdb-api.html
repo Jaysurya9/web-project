@@ -97,8 +97,19 @@
       <a class="navbar-brand" href="#">DIGITAL PREMIERES</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a onClick=getMovies(Trending_All_Last_24h) href="#">Trending</a></li>
+      <li><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a  class="dropdown-toggle" data-toggle="dropdown" href="#">Trending
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a onClick=getMovies(Trending_All_Last_24h) href="#">Today</a></li>
+          <li><a onClick=getMovies(Trending_All_Last_7d) href="#">Last Week</a></li>
+          <li><a onClick=getMovies(Trending_Movies_Last_24h) href="#">Movies Today</a></li>
+          <li><a onClick=getMovies(Trending_Movies_Last_7d) href="#">Movies Last Week</a></li>
+          <li><a onClick=getMovies(Trending_Shows_Last_24h) href="#">Movies Today</a></li>
+          <li><a onClick=getMovies(Trending_Shows_Last_7d) href="#">Movies Last Week</a></li>
+        </ul>
+      </li>
       <li><a onClick=getMovies(Telugu_Movies) href="#">Telugu Movies</a></li>
     </ul>
 	<form id="form">
@@ -391,6 +402,7 @@
 
       }
 	}
+
 
 </script>
 
